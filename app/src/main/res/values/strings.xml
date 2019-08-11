@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">饭饭</string>
+    <string name="title_1">附近</string>
+    <string name="title_2">约会</string>
+    <string name="title_3">消息</string>
+
+    <string name="more">更多</string>
+    <string name="send">发送</string>
+    <string name="enter_message">输入信息...</string>
+</resources>

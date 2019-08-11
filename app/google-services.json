@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "688287931292",
+    "firebase_url": "https://llqoli.firebaseio.com",
+    "project_id": "llqoli",
+    "storage_bucket": "llqoli.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:688287931292:android:df20ceaaaf31ee3c",
+        "android_client_info": {
+          "package_name": "com.qoli.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "688287931292-21dvfd98jb2qdr2l947h7l6fr67d2lrl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.qoli.chatapp",
+            "certificate_hash": "fa180f12dba2152b4aeee1aaf86bb9ea4493e297"
+          }
+        },
+        {
+          "client_id": "688287931292-oa93bfu4v3ur6b9suboahuqesovb2e7s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIJb9Ehl0JSbMIqSbKh66rK3o3anFB7H8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "688287931292-oa93bfu4v3ur6b9suboahuqesovb2e7s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
