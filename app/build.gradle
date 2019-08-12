@@ -20,6 +20,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets{
+        main{
+            jniLibs.srcDir 'libs'
+            jni.srcDirs = []    //disable automatic ndk-build
+        }
+    }
 }
 
 dependencies {
@@ -43,7 +49,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:19.0.1'
 
 
-    //anko
+    //anko https://github.com/Kotlin/anko/wiki
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
     implementation "org.jetbrains.anko:anko-design:$anko_version"
 
@@ -58,12 +64,24 @@ dependencies {
     // anko-sqlite
     implementation "org.jetbrains.anko:anko-sqlite:$anko_version"
 
-    // recyclical DSL
+    // recyclical DSL https://github.com/afollestad/recyclical
     implementation 'com.afollestad:recyclical:1.1.0'
 
     // socket io
     implementation 'com.github.nkzawa:socket.io-client:0.6.0'
 
-    // push
+    // push https://pusher.com
     implementation 'com.pusher:pusher-java-client:1.8.2'
+
+    // 圓角圖片 https://github.com/vinc3m1/RoundedImageView
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    // 載入圖片 https://square.github.io/picasso/
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // 地理位置
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    // 權限檢查 https://github.com/QuickPermissions/QuickPermissions-Kotlin
+    implementation 'com.github.quickpermissions:quickpermissions-kotlin:0.4.0'
 }

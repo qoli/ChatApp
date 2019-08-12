@@ -3,32 +3,64 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_margin="8dp"
-              android:layout_marginLeft="0dp"
+              android:layout_marginStart="0dp"
               android:orientation="vertical"
         >
 
-    <TextView
-            android:background="@drawable/chat_rounded_corner_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/text_message_left"
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="16dp"
-            android:textColor="#4d4d4d"
-            android:text="Message"
-            android:layout_gravity="left"
-            />
+            android:id="@+id/chat_left">
 
-    <TextView
-            android:background="@drawable/chat_rounded_corner_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/text_message_right"
+        <TextView
+                android:background="@drawable/chat_rounded_corner_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_message_left"
+                android:textSize="16sp"
+                android:textColor="#4d4d4d"
+                android:text="@string/message"
+                />
+
+        <TextView
+                android:text="@string/dateplace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/message_datetime_left"
+                android:textSize="12sp"
+                android:textColor="@color/b65"
+                />
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="16dp"
-            android:textColor="#4d4d4d"
-            android:text="Message"
-            android:layout_gravity="right"
-            />
+            android:id="@+id/chat_right">
+
+        <TextView
+                android:background="@drawable/chat_rounded_corner_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_message_right"
+                android:textSize="16sp"
+                android:textColor="#4d4d4d"
+                android:text="@string/message"
+                android:layout_gravity="end"
+                />
+
+        <TextView
+                android:text="@string/dateplace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/message_datetime_right"
+                android:textSize="12sp"
+                android:textColor="@color/b65"
+                android:layout_gravity="end"
+                />
+    </LinearLayout>
 
 </LinearLayout>

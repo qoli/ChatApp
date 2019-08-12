@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.qoli.chatapp">
 
+
+    <!-- ↓ 網絡請求 -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- ↓ 地理位置 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
             android:name=".Application"
@@ -40,12 +45,22 @@
                     android:value="com.qoli.chatapp.ActivityUserProfile" />
         </activity>
 
-        <activity android:name=".ActivityMain">
+        <activity
+                android:name=".ActivityMain"
+
+                >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <meta-data
+                android:name="com.baidu.lbsapi.API_KEY"
+                android:value="gSZXDqK0d3O9DeiOQoF4Oaw1M1p4zSUQ" >
+        </meta-data>
+
     </application>
+
 
 </manifest>

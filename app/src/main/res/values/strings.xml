@@ -7,4 +7,18 @@
     <string name="more">更多</string>
     <string name="send">发送</string>
     <string name="enter_message">输入信息...</string>
+    <string name="userName">用户名</string>
+    <string name="useravatar">UserAvatar</string>
+    <string name="user_real">user_real</string>
+    <string name="user_vip">user_vip</string>
+    <string name="dateplace">DatePlace</string>
+    <string name="descriptionplace">DescriptionPlace</string>
+    <string name="ismicwait">isMicWait</string>
+    <string name="ismicbusy">isMicBusy</string>
+    <string name="message">Message</string>
+    <string name="main_text_1">附近的人</string>
+    <string name="main_text_2">最近注册</string>
+    <string name="main_text_3">认证用户</string>
+    <string name="location_circel">location_circel</string>
+    <string name="locationPlace">位置</string>
 </resources>

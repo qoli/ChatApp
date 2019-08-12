@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 
 // Recyclical
 import android.view.View
+import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import com.afollestad.recyclical.ViewHolder
 import com.afollestad.recyclical.datasource.DataSource
 import com.afollestad.recyclical.datasource.dataSourceTypedOf
@@ -25,8 +27,11 @@ import kotlinx.android.synthetic.main.activity_chat.*
 import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
 import com.github.nkzawa.emitter.Emitter
+import kotlinx.android.synthetic.main.chat_bubble.*
 import org.json.JSONException
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ActivityChat : AppCompatActivity() {
@@ -105,7 +110,6 @@ class ActivityChat : AppCompatActivity() {
         return
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -129,15 +133,18 @@ class ActivityChat : AppCompatActivity() {
 
                     print("this index: $index")
 
-                    messageTextViewLeft.text = item.message
-                    messageTextViewRight.text = item.message
+                    messageLeft.text = item.message
+                    messageRight.text = item.message
+                    datetimeRight.text = getNow()
+                    datetimeLeft.text = getNow()
 
                     if (item.isSend) {
-                        messageTextViewLeft.visibility = View.GONE
-                        messageTextViewRight.visibility = View.VISIBLE
+                        leftBlock.isVisible = false
+                        rightBlock.isVisible = true
+
                     } else {
-                        messageTextViewLeft.visibility = View.VISIBLE
-                        messageTextViewRight.visibility = View.GONE
+                        leftBlock.isVisible = true
+                        rightBlock.isVisible = false
                     }
 
                 }
@@ -157,14 +164,29 @@ class ActivityChat : AppCompatActivity() {
         }
 
     }
+
+    private fun getNow(): String {
+        if (android.os.Build.VERSION.SDK_INT >= 24){
+            return SimpleDateFormat("hh:mm a").format(Date())
+        }else{
+            var tms = Calendar.getInstance()
+            return tms.get(Calendar.HOUR_OF_DAY).toString() + ":" + tms.get(Calendar.MINUTE).toString() +":" + tms.get(Calendar.SECOND).toString()
+        }
+
+    }
 }
 
 class MessageViewHolder(itemView: View) : ViewHolder(itemView) {
-    val messageTextViewLeft: TextView = itemView.findViewById(R.id.text_message_left)
-    val messageTextViewRight: TextView = itemView.findViewById(R.id.text_message_right)
+    val leftBlock: LinearLayout = itemView.findViewById(R.id.chat_left)
+    val rightBlock: LinearLayout = itemView.findViewById(R.id.chat_right)
+    val messageLeft: TextView = itemView.findViewById(R.id.text_message_left)
+    val messageRight: TextView = itemView.findViewById(R.id.text_message_right)
+    val datetimeLeft: TextView = itemView.findViewById(R.id.message_datetime_left)
+    val datetimeRight: TextView = itemView.findViewById(R.id.message_datetime_right)
 }
 
 data class Message(
     var message: String,
     var isSend: Boolean
 )
+

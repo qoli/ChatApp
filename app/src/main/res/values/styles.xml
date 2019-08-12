@@ -29,5 +29,22 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <style name="NoActionBar" parent="@android:style/Theme.Holo.Light">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+
+    <style name="StatusText1Online">
+        <item name="android:fontFamily">@font/sourcehansanssc_bold</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/b20</item>
+    </style>
+
+    <style name="StatusText2Offline">
+        <item name="android:fontFamily">@font/sourcehansanssc_light</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/b65</item>
+    </style>
 
 </resources>

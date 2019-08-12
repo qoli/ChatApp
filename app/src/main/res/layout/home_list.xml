@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="16dp"
+              android:orientation="horizontal"
+              android:baselineAligned="false">
+
+    <FrameLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            >
+
+        <com.makeramen.roundedimageview.RoundedImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:id="@+id/avatar"
+                android:contentDescription="@string/useravatar"
+                app:riv_corner_radius="8dp"
+                android:src="@color/b92"
+                android:layout_gravity="center"
+                android:background="@drawable/avatar_background"
+                />
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/identity_real"
+                android:id="@+id/isReal"
+                android:visibility="invisible"
+                android:layout_gravity="bottom|end"
+                android:contentDescription="@string/user_real"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/identity_vip"
+                android:id="@+id/isVip"
+                android:visibility="invisible"
+                android:layout_gravity="bottom|end"
+                android:contentDescription="@string/user_vip"/>
+    </FrameLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingStart="16dp"
+            android:paddingEnd="0dp">
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="16dp">
+
+            <TextView
+                    android:id="@+id/name"
+                    android:text="@string/userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center|start"
+                    android:textColor="@color/b30"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+
+            <TextView
+                    style="@style/StatusText2Offline"
+                    android:text="@string/dateplace"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="13sp"
+                    android:id="@+id/date"
+                    android:gravity="center|end"
+                    />
+        </FrameLayout>
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                >
+
+            <TextView
+                    android:text="@string/descriptionplace"
+                    android:textColor="@color/b55"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/description"
+                    />
+
+            <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/icon_mic_wait"
+                        android:layout_gravity="top|end"
+                        android:visibility="visible"
+                        android:id="@+id/isMicWait"
+                        android:contentDescription="@string/ismicwait"/>
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/icon_mic_busy"
+                        android:layout_gravity="end"
+                        android:visibility="invisible"
+                        android:id="@+id/isMicBusy"
+                        android:contentDescription="@string/ismicbusy"/>
+            </FrameLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

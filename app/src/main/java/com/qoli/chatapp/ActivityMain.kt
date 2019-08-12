@@ -1,118 +1,145 @@
 package com.qoli.chatapp
 
-import android.content.Intent
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
+import android.location.Criteria
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-
-//layout
-import kotlinx.android.synthetic.main.activity_main.*
-
-import android.widget.TextView
+import androidx.annotation.RequiresApi
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 
 // anko
 import org.jetbrains.anko.*
 
-// Recyclical
-import android.view.View
-import com.afollestad.recyclical.ViewHolder
-import com.afollestad.recyclical.datasource.dataSourceTypedOf
-import com.afollestad.recyclical.setup
-import com.afollestad.recyclical.withItem
+// Fragment
+import androidx.fragment.app.Fragment
 
 //
 import com.google.firebase.iid.FirebaseInstanceId
+import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
+import com.google.android.gms.common.util.MapUtils
 
 
-class ActivityMain : AppCompatActivity() {
 
-    private val TAG = "MainActivity"
+
+class ActivityMain : AppCompatActivity(), AnkoLogger, LocationListener {
+    private fun loadFragment(fragment: Fragment?): Boolean {
+        if (fragment != null) {
+            supportFragmentManager.beginTransaction().replace(R.id.frament_container, fragment).commit()
+            return true
+        }
+        return false
+    }
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_1 -> {
-                return@OnNavigationItemSelectedListener true
+                return@OnNavigationItemSelectedListener loadFragment(FragmentHome())
             }
             R.id.navigation_2 -> {
-                return@OnNavigationItemSelectedListener true
+                return@OnNavigationItemSelectedListener loadFragment(FragmentDate())
             }
             R.id.navigation_3 -> {
-                return@OnNavigationItemSelectedListener true
+                return@OnNavigationItemSelectedListener loadFragment(FragmentMessage())
             }
+
         }
         false
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val inflater = menuInflater
-        inflater.inflate(R.menu.user_list_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.search -> {
-            toast("search")
-            true
-        }
-        else -> {
-            super.onOptionsItemSelected(item)
-        }
-    }
-
+    // ↓ View 生命週期
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // hide ActionBar
+        supportActionBar?.hide()
 
         // BottomNavigationView
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
-        // https://material.io
+        info { "activity_main onCreate()" }
 
-        this.getMyToken()
+        this.getGMS()
 
-        // dataSourceTypedOf(...) here creates a DataSource<Person>
-        val dataSource = dataSourceTypedOf(
-            Person("Aidan", 24),
-            Person("Nina", 24),
-            Person("yaya", 18)
-        )
+        this.getPushToken()
 
-        // setup{} is an extension method on RecyclerView
-        recyclerView.setup {
-            withDataSource(dataSource)
-            withItem<Person, PersonViewHolder>(R.layout.main_user_list) {
-                onBind(::PersonViewHolder) { index, item ->
-                    print(index)
-                    name.text = item.name
-                    age.text = item.age.toString()
-                }
-                onClick { index ->
-                    print(index)
-                    startActivity(intentFor<ActivityUserProfile>("username" to "${item.name}").addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
-                }
-            }
+        // 切換主頁面
+        loadFragment(FragmentHome())
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+    // ↑ View 生命週期
+
+
+    // ↓ GMS Location
+
+    private lateinit var locationManager: LocationManager
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    @SuppressLint("MissingPermission")
+    private fun getGMS() = runWithPermissions(Manifest.permission.ACCESS_FINE_LOCATION) {
+
+        val crit = Criteria()
+        crit.accuracy = Criteria.ACCURACY_FINE
+        crit.powerRequirement = Criteria.POWER_LOW
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val provider = locationManager.getBestProvider(crit,true)
+
+        info {"provider: $provider"}
+
+
+        locationManager.requestLocationUpdates(provider, 0, 0F, this)
+
+        this.getLastKnownLocation()
+
+        //locationManager.removeUpdates(this)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLastKnownLocation() = runWithPermissions(Manifest.permission.ACCESS_COARSE_LOCATION) {
+        locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER, this, null)
+        var location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        info { "getLastKnownLocation GPS $location" }
+        if (location == null) {
+            locationManager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, this, null)
+            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            info { "getLastKnownLocation Network $location" }
         }
 
     }
 
-    private fun getMyToken() {
+    override fun onLocationChanged(location: Location) {
+        info { "Listener RUNNING" }
+        info { "onLocationChanged $location" }
+    }
+
+    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+        info { "onStatusChanged $provider $status" }
+    }
+
+    override fun onProviderEnabled(provider: String?) {
+        info { "onProviderEnabled $provider" }
+    }
+
+    override fun onProviderDisabled(provider: String?) {
+        info { "onProviderDisabled $provider" }
+    }
+
+    // ↑ GMS Location
+
+    private fun getPushToken() {
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { result ->
             val token = result.token
             toast(token)
         }
     }
-
 }
-
-class PersonViewHolder(itemView: View) : ViewHolder(itemView) {
-    val name: TextView = itemView.findViewById(R.id.text_name)
-    val age: TextView = itemView.findViewById(R.id.text_age)
-}
-
-data class Person(
-    var name: String,
-    var age: Int
-)
