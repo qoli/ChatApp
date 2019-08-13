@@ -1,8 +1,12 @@
 package com.qoli.chatapp
 
+//
+
+// anko
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -11,31 +15,136 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.afollestad.recyclical.ViewHolder
 import com.afollestad.recyclical.datasource.dataSourceTypedOf
+import com.afollestad.recyclical.datasource.emptyDataSource
 import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
+import com.google.android.material.tabs.TabLayout
+import com.orhanobut.hawk.Hawk
+import com.qoli.chatapp.function.AppGMS
 import com.squareup.picasso.Picasso
-import org.jetbrains.anko.*
-
-//
 import kotlinx.android.synthetic.main.main_home.*
-
-// anko
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
+import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.intentFor
+import org.jetbrains.anko.yesButton
 
-class FragmentHome : Fragment(), AnkoLogger {
+class FragmentHome : Fragment(), AnkoLogger, SwipeRefreshLayout.OnRefreshListener, TabLayout.OnTabSelectedListener {
+
+    // ↓ View
+
+    private var myView: View? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater?.inflate(R.layout.main_home, null)
+        return inflater.inflate(R.layout.main_home, null)
     }
 
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        myView = view
 
-        // dataSourceTypedOf(...) here creates a DataSource<Person>
-        val dataSource = dataSourceTypedOf(
+        myAvatar()
+        gmsInit()
+
+    }
+
+    // ↑ View
+
+    private fun myAvatar() {
+        Picasso.get().load("https://pic.qqtn.com/up/2019-7/2019072508412719909.jpg").into(myAvatar)
+    }
+
+    // ↓ GMS
+
+    private var gms: AppGMS? = null
+
+    private fun gmsInit() {
+
+//        if (Hawk.contains("myLocationTextView")) {
+//            val name: String = Hawk.get("myLocationTextView")
+//
+//            if (!name.isNullOrEmpty()) {
+//                info { "gmsInit() name: $name" }
+//                myLocationTextView.text = name
+//                personInit()
+//            }
+//        }
+
+        if (gms == null) {
+            gms = AppGMS(activity!!.application)
+            getLocation(gms!!)
+        }
+
+        myLocationTextView.onClick {
+            getLocation(gms!!)
+        }
+    }
+
+    private fun getLocation(gms: AppGMS) {
+        myLocationTextView.text = getString(R.string.lookingForLocation)
+        Handler().postDelayed({
+            val name = gms.getName()
+
+            if (name == "") {
+                myLocationTextView.text = getString(R.string.locationError)
+                alert("定位功能失败，请检查是否开启位置功能或检查权限设定。", "定位服务") {
+                    yesButton {
+                        getLocation(gms)
+                    }
+                }.show()
+            } else {
+                Hawk.put("myLocationTextView", name)
+                myLocationTextView.text = name
+                personInit()
+            }
+        }, 1200)
+    }
+
+    // ↑ GMS
+
+    // ↓ pageSetup
+
+    override fun onTabReselected(p0: TabLayout.Tab?) {
+//        info { p0 }
+    }
+
+    override fun onTabUnselected(p0: TabLayout.Tab?) {
+//        info { p0 }
+    }
+
+    override fun onTabSelected(item: TabLayout.Tab) {
+        info { "onTabSelected: ${item.position}" }
+        myLocationTextView.isVisible = item.position == 0
+        personDataSource.removeAt(0)
+    }
+
+    override fun onRefresh() {
+        Handler().postDelayed({
+            personInit()
+        }, 3000)
+    }
+
+    private fun personInit() {
+        swiperefresh.isRefreshing = true
+        tabLayout.addOnTabSelectedListener(this)
+        swiperefresh.setColorSchemeResources(R.color.colorPrimary)
+        swiperefresh.setOnRefreshListener(this)
+
+        personData()
+        personSetup()
+        swiperefresh.isRefreshing = false
+    }
+
+    private var personDataSource = emptyDataSource()
+
+    private fun personData() {
+
+        personDataSource = dataSourceTypedOf(
             Person(
                 "https://pic.qqtn.com/up/2018-8/2018081409360724634.jpg",
                 "玩火小仙女",
@@ -69,14 +178,23 @@ class FragmentHome : Fragment(), AnkoLogger {
                 "<span style=\"color: #ff83b6;\">[今天约会]</span> 22, 学生",
                 "10.86km · 1 小時前",
                 false, false, false, false, true
+            ),
+            Person(
+                "",
+                "网名很长有什么用，名字没人看",
+                "<span style=\"color: #ff83b6;\">[今天约会]</span> 22, 学生",
+                "10.86km · 1 小時前",
+                false, false, false, false, true
             )
         )
+    }
 
-        // setup{} is an extension method on RecyclerView
+    private fun personSetup() {
         recyclerView.setup {
-            withDataSource(dataSource)
+            withDataSource(personDataSource)
             withItem<Person, PersonViewHolder>(R.layout.home_list) {
                 onBind(::PersonViewHolder) { index, item ->
+                    print(index)
                     if (!item.avatar.isNullOrEmpty()) {
                         Picasso.get().load("${item.avatar}").into(avatar)
                     }
@@ -99,6 +217,7 @@ class FragmentHome : Fragment(), AnkoLogger {
         }
     }
 
+    // ↑ pageSetup
 }
 
 

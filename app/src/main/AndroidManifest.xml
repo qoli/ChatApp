@@ -1,64 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.qoli.chatapp">
+    package="com.qoli.chatapp">
 
 
     <!-- ↓ 網絡請求 -->
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <!-- ↓ 地理位置 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-            android:name=".Application"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            >
+        android:name=".MainApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="09d28847ae6a2a563152ba90663c44fa"></meta-data>
+
+        <service android:name="com.amap.api.location.APSService"></service>
+
         <service android:name=".PushService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".ActivityLaunch">
-        </activity>
-        <activity android:name=".ActivityWelcome">
+        <activity android:name=".ActivityLaunch"></activity>
+        <activity android:name=".ActivityWelcome"></activity>
+        <activity
+            android:name=".ActivityUserProfile"
+            android:parentActivityName=".ActivityMain">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.qoli.chatapp.ActivityMain" />
         </activity>
         <activity
-                android:name=".ActivityUserProfile"
-                android:parentActivityName=".ActivityMain"
-                >
+            android:name=".ActivityChat"
+            android:parentActivityName=".ActivityUserProfile">
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.qoli.chatapp.ActivityMain" />
-        </activity>
-        <activity
-                android:name=".ActivityChat"
-                android:parentActivityName=".ActivityUserProfile"
-                >
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.qoli.chatapp.ActivityUserProfile" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.qoli.chatapp.ActivityUserProfile" />
         </activity>
 
-        <activity
-                android:name=".ActivityMain"
+        <activity android:name=".ActivityMain"
 
-                >
+            >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-                android:name="com.baidu.lbsapi.API_KEY"
-                android:value="gSZXDqK0d3O9DeiOQoF4Oaw1M1p4zSUQ" >
-        </meta-data>
 
     </application>
 

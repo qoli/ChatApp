@@ -17,7 +17,7 @@ import org.junit.Assert.*
 class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
-        // Context of the Application under test.
+        // Context of the MainApplication under test.
         val appContext = InstrumentationRegistry.getTargetContext()
         assertEquals("com.qoli.chatapp", appContext.packageName)
     }

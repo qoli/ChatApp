@@ -3,14 +3,9 @@ package com.qoli.chatapp
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-
-// anko
-import org.jetbrains.anko.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
-
-//layout
 import kotlinx.android.synthetic.main.activity_user_profile.*
-import androidx.core.app.ActivityCompat
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.sdk25.coroutines.onClick
 
 class ActivityUserProfile : AppCompatActivity() {
 

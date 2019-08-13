@@ -20,5 +20,7 @@
     <string name="main_text_2">最近注册</string>
     <string name="main_text_3">认证用户</string>
     <string name="location_circel">location_circel</string>
-    <string name="locationPlace">位置</string>
+    <string name="lookingForLocation">正在定位</string>
+    <string name="locationError">定位错误，请点击重试</string>
+    <string name="myavatar">myAvatar</string>
 </resources>

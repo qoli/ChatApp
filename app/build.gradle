@@ -20,12 +20,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets{
-        main{
-            jniLibs.srcDir 'libs'
-            jni.srcDirs = []    //disable automatic ndk-build
-        }
-    }
 }
 
 dependencies {
@@ -79,9 +73,13 @@ dependencies {
     // 載入圖片 https://square.github.io/picasso/
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    // 地理位置
-    implementation 'com.google.android.gms:play-services-location:17.0.0'
-
     // 權限檢查 https://github.com/QuickPermissions/QuickPermissions-Kotlin
     implementation 'com.github.quickpermissions:quickpermissions-kotlin:0.4.0'
+
+    // 高德定位 https://lbs.amap.com/api/android-location-sdk/locationsummary
+    implementation 'com.amap.api:location:latest.integration'
+
+    // Hawk simple key-value storage https://github.com/orhanobut/hawk
+    implementation "com.orhanobut:hawk:2.0.1"
+
 }
