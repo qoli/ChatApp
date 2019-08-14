@@ -14,7 +14,7 @@ class ActivityLaunch : AppCompatActivity() {
 //        startActivity<ActivityWelcome>()
 
         // 已註冊用戶
-        startActivity<ActivityMain>()
+        //startActivity<ActivityMain>()
 
     }
 }

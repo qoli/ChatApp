@@ -14,11 +14,14 @@ import com.afollestad.recyclical.withItem
 
 //layout
 import kotlinx.android.synthetic.main.main_date.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 
 // anko
 import org.jetbrains.anko.support.v4.intentFor
+import org.jetbrains.anko.support.v4.toast
 
-class FragmentDate : Fragment() {
+class FragmentDate : Fragment(), AnkoLogger {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater?.inflate(R.layout.main_date, null)
@@ -44,8 +47,7 @@ class FragmentDate : Fragment() {
                     name.text = item.name
                 }
                 onClick { index ->
-                    print(index)
-                    startActivity(intentFor<ActivityUserProfile>("username" to "${item.name}").addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))
+                    toast("Click: $index")
                 }
             }
         }

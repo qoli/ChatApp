@@ -25,9 +25,7 @@
             android:text="@string/lookingForLocation"
             android:textColor="@color/b30"
             android:textSize="16sp"
-            android:textStyle="bold"
-
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
@@ -36,6 +34,7 @@
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/myAvatar"
+            style="@style/ImageViewClickable"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_gravity="center|end"

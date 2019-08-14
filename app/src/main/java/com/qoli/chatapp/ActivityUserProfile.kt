@@ -28,6 +28,7 @@ class ActivityUserProfile : AppCompatActivity() {
 
         // Get a support ActionBar corresponding to this toolbar and enable the Up button
         supportActionBar?.title = usernameString
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
 

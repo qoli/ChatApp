@@ -7,14 +7,46 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.iid.FirebaseInstanceId
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.toast
+import com.orhanobut.hawk.Hawk
+import com.qoli.chatapp.AppString.StoreKeyName
+import com.qoli.chatapp.Setting.SettingGender
+import com.qoli.chatapp.Setting.SettingMember
+import org.jetbrains.anko.*
 
 
 class ActivityMain : AppCompatActivity(), AnkoLogger {
 
-    private fun loadFragment(fragment: Fragment?): Boolean {
+    // ↓ View 生命週期
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
+        setContentView(R.layout.activity_main)
+
+        //startActivity<SettingMember>()
+        //return
+
+        if (!userStatus()) {
+            return
+        }
+
+        // BottomNavigationView
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+        // 切換主頁面
+        bottomNavSwitchFragment(FragmentHome())
+
+        info { "activity_main onCreate()" }
+
+        methodRequiresPermissions()
+        getPushToken()
+
+    }
+
+    // ↑ View 生命週期
+
+    // ↓ BottomNavigationView
+    private fun bottomNavSwitchFragment(fragment: Fragment?): Boolean {
         if (fragment != null) {
             supportFragmentManager.beginTransaction().replace(R.id.frament_container, fragment).commit()
             return true
@@ -25,44 +57,20 @@ class ActivityMain : AppCompatActivity(), AnkoLogger {
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_1 -> {
-                return@OnNavigationItemSelectedListener loadFragment(FragmentHome())
+                return@OnNavigationItemSelectedListener bottomNavSwitchFragment(FragmentHome())
             }
             R.id.navigation_2 -> {
-                return@OnNavigationItemSelectedListener loadFragment(FragmentDate())
+                return@OnNavigationItemSelectedListener bottomNavSwitchFragment(FragmentDate())
             }
             R.id.navigation_3 -> {
-                return@OnNavigationItemSelectedListener loadFragment(FragmentMessage())
+                return@OnNavigationItemSelectedListener bottomNavSwitchFragment(FragmentMessage())
             }
 
         }
         false
     }
 
-    // ↓ View 生命週期
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        // hide ActionBar
-        supportActionBar?.hide()
-
-        // BottomNavigationView
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-
-        info { "activity_main onCreate()" }
-
-        methodRequiresPermissions()
-        getPushToken()
-
-        // 切換主頁面
-        loadFragment(FragmentHome())
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-    // ↑ View 生命週期
+    // ↑ BottomNavigationView
 
     // ↓ 權限請求
     private fun methodRequiresPermissions() = runWithPermissions(
@@ -73,6 +81,28 @@ class ActivityMain : AppCompatActivity(), AnkoLogger {
         info { "methodRequiresPermissions" }
     }
     // ↑ 權限
+
+    /**
+     *
+     * @return true, 已登入；false 未登入
+     */
+
+    private fun userStatus(): Boolean {
+        val key = StoreKeyName().ifLogin()
+
+        if (Hawk.contains(key)) {
+            if (Hawk.get(key)) {
+                //已登入
+                return true
+            } else {
+                startActivity<ActivityWelcome>()
+                return false
+            }
+        } else {
+            startActivity<ActivityWelcome>()
+            return false
+        }
+    }
 
     private fun getPushToken() {
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { result ->

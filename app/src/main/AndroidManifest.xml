@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qoli.chatapp">
-
-
     <!-- ↓ 網絡請求 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- ↓ 地理位置 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- ↓ 地理位置 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -17,45 +14,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Setting.SettingDone"></activity>
+        <activity android:name=".Setting.SettingMember" />
+        <activity android:name=".Setting.SettingGender" />
+        <activity android:name=".ActivitySetting" />
+        <activity android:name=".Welcome.WelcomeSign" />
+        <activity android:name=".Welcome.WelcomeSMSAuth" />
+        <activity android:name=".Welcome.WelcomePassword" />
+        <activity android:name=".ToolsWebview" />
+        <activity android:name=".ActivityLaunch" />
+        <activity android:name=".ActivityWelcome" />
+        <activity android:name=".ActivityUserProfile" />
+        <activity android:name=".ActivityChat" />
+        <activity android:name=".ActivityMain">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="09d28847ae6a2a563152ba90663c44fa"></meta-data>
+            android:value="09d28847ae6a2a563152ba90663c44fa" />
 
-        <service android:name="com.amap.api.location.APSService"></service>
-
+        <service android:name="com.amap.api.location.APSService" />
         <service android:name=".PushService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <activity android:name=".ActivityLaunch"></activity>
-        <activity android:name=".ActivityWelcome"></activity>
-        <activity
-            android:name=".ActivityUserProfile"
-            android:parentActivityName=".ActivityMain">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.qoli.chatapp.ActivityMain" />
-        </activity>
-        <activity
-            android:name=".ActivityChat"
-            android:parentActivityName=".ActivityUserProfile">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.qoli.chatapp.ActivityUserProfile" />
-        </activity>
-
-        <activity android:name=".ActivityMain"
-
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
     </application>
-
 
 </manifest>

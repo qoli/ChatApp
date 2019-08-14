@@ -20,11 +20,19 @@
   <color name="b65">#a6a6a6</color>
   <color name="b55">#8c8c8c</color>
   <color name="b30">#4d4d4d</color>
+  <color name="b30a50">#504d4d4d</color>
   <color name="b20">#333333</color>
   <color name="color_primary">#117eff</color>
   <color name="pink">#ff83b6</color>
+  <color name="green">#3be66b</color>
+  <color name="green_shadow">#5020CD51</color>
+  <color name="deep_sky_blue">#007aff</color>
+  <color name="rusty_red">#c20e0e</color>
+  <color name="maize">#ffca50</color>
+
   <color name="colorPrimary">#117EFF</color>
   <color name="colorPrimaryDark">#fff</color>
   <color name="colorAccent">#D81B60</color>
   <color name="white">#FFFFFF</color>
+  <color name="whitea50">#50FFFFFF</color>
 </resources>

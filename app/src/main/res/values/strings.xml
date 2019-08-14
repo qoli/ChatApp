@@ -23,4 +23,13 @@
     <string name="lookingForLocation">正在定位</string>
     <string name="locationError">定位错误，请点击重试</string>
     <string name="myavatar">myAvatar</string>
+
+    <string name="loginText">登录</string>
+    <string name="forgetText">忘记密码</string>
+    <string name="nextText">下一步</string>
+    <string name="backText">上一步</string>
+    <string name="resend">重新发送</string>
+    <string name="pay_dialog_title">选择一种支付方式</string>
+    <string name="pay_dialog_button">前往支付</string>
+    <string name="cancel">取消</string>
 </resources>

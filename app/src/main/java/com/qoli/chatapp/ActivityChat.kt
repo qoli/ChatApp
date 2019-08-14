@@ -116,6 +116,7 @@ class ActivityChat : AppCompatActivity() {
 
         val usernameString = intent.getStringExtra("username")
         supportActionBar?.title = usernameString
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         this.connectChat()
 

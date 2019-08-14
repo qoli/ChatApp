@@ -23,7 +23,7 @@ import com.afollestad.recyclical.setup
 import com.afollestad.recyclical.withItem
 import com.google.android.material.tabs.TabLayout
 import com.orhanobut.hawk.Hawk
-import com.qoli.chatapp.function.AppGMS
+import com.qoli.chatapp.AppFunction.AppGMS
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.main_home.*
 import org.jetbrains.anko.AnkoLogger
@@ -31,6 +31,7 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.intentFor
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.yesButton
 
 class FragmentHome : Fragment(), AnkoLogger, SwipeRefreshLayout.OnRefreshListener, TabLayout.OnTabSelectedListener {
@@ -50,6 +51,10 @@ class FragmentHome : Fragment(), AnkoLogger, SwipeRefreshLayout.OnRefreshListene
 
         myAvatar()
         gmsInit()
+
+        myAvatar.onClick {
+            startActivity<ActivitySetting>()
+        }
 
     }
 

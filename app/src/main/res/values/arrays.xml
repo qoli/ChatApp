@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="payWay">
+        <item>支付宝</item>
+        <item>微信支付</item>
+    </string-array>
+</resources>
