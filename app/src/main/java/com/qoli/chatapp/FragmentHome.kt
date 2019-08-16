@@ -1,8 +1,5 @@
 package com.qoli.chatapp
 
-//
-
-// anko
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -29,10 +26,8 @@ import kotlinx.android.synthetic.main.main_home.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import org.jetbrains.anko.support.v4.alert
 import org.jetbrains.anko.support.v4.intentFor
 import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.yesButton
 
 class FragmentHome : Fragment(), AnkoLogger, SwipeRefreshLayout.OnRefreshListener, TabLayout.OnTabSelectedListener {
 
@@ -56,6 +51,11 @@ class FragmentHome : Fragment(), AnkoLogger, SwipeRefreshLayout.OnRefreshListene
             startActivity<ActivitySetting>()
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mHandler.removeCallbacks(mRunnable)
     }
 
     // ↑ View
@@ -90,24 +90,26 @@ class FragmentHome : Fragment(), AnkoLogger, SwipeRefreshLayout.OnRefreshListene
         }
     }
 
+    private lateinit var mHandler: Handler
+    private lateinit var mRunnable: Runnable
+
     private fun getLocation(gms: AppGMS) {
-        myLocationTextView.text = getString(R.string.lookingForLocation)
-        Handler().postDelayed({
+        myLocationTextView?.text = getString(R.string.lookingForLocation)
+
+        mHandler = Handler()
+        mRunnable = Runnable {
             val name = gms.getName()
 
             if (name == "") {
                 myLocationTextView.text = getString(R.string.locationError)
-                alert("定位功能失败，请检查是否开启位置功能或检查权限设定。", "定位服务") {
-                    yesButton {
-                        getLocation(gms)
-                    }
-                }.show()
             } else {
                 Hawk.put("myLocationTextView", name)
                 myLocationTextView.text = name
                 personInit()
             }
-        }, 1200)
+        }
+
+        mHandler.postDelayed(mRunnable, 1200)
     }
 
     // ↑ GMS
@@ -165,6 +167,31 @@ class FragmentHome : Fragment(), AnkoLogger, SwipeRefreshLayout.OnRefreshListene
                 true,
                 true,
                 false
+            ),
+            Person(
+                "https://pic.qqtn.com/up/2019-5/2019050718292867806.jpg",
+                "思雨",
+                "22, 学生",
+                "3.22km · 15 分钟前",
+                false,
+                true,
+                false,
+                true,
+                false
+            ),
+            Person(
+                "",
+                "无头像",
+                "<span style=\"color: #ff83b6;\">[今天约会]</span> 22, 学生",
+                "10.86km · 1 小時前",
+                false, false, false, false, true
+            ),
+            Person(
+                "",
+                "网名很长有什么用，名字没人看",
+                "<span style=\"color: #ff83b6;\">[今天约会]</span> 22, 学生",
+                "10.86km · 1 小時前",
+                false, false, false, false, true
             ),
             Person(
                 "https://pic.qqtn.com/up/2019-5/2019050718292867806.jpg",

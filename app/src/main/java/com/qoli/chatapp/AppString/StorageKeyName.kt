@@ -1,6 +1,6 @@
 package com.qoli.chatapp.AppString
 
-class StoreKeyName {
+class StorageKeyName {
     fun ifLogin() : String {
         return "ifLogin"
     }

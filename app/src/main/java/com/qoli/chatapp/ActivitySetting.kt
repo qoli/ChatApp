@@ -1,7 +1,12 @@
 package com.qoli.chatapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.orhanobut.hawk.Hawk
+import com.qoli.chatapp.AppString.StorageKeyName
+import kotlinx.android.synthetic.main.activity_setting.*
+import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.startActivity
 
 class ActivitySetting : AppCompatActivity() {
 
@@ -21,5 +26,10 @@ class ActivitySetting : AppCompatActivity() {
 
         supportActionBar?.title = "设置"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        logout.onClick {
+            Hawk.put(StorageKeyName().ifLogin(), false)
+            startActivity<ActivityWelcome>()
+        }
     }
 }

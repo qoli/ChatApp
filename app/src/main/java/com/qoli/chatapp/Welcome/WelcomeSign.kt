@@ -9,9 +9,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.orhanobut.hawk.Hawk
-import com.qoli.chatapp.ActivityChat
 import com.qoli.chatapp.ActivityMain
-import com.qoli.chatapp.AppString.StoreKeyName
+import com.qoli.chatapp.AppString.StorageKeyName
 import com.qoli.chatapp.CompoundView.inputGroupUI
 import com.qoli.chatapp.R
 import org.jetbrains.anko.*
@@ -49,7 +48,7 @@ class WelcomeSign : AppCompatActivity() {
 
         ui.login.onClick {
             if (isLogin) {
-                Hawk.put(StoreKeyName().ifLogin(), true)
+                Hawk.put(StorageKeyName().ifLogin(), true)
                 startActivity<ActivityMain>()
             } else {
                 startActivity(intentFor<WelcomeSMSAuth>("phone" to ui.phone.editText.text).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION))

@@ -8,9 +8,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.iid.FirebaseInstanceId
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import com.orhanobut.hawk.Hawk
-import com.qoli.chatapp.AppString.StoreKeyName
-import com.qoli.chatapp.Setting.SettingGender
-import com.qoli.chatapp.Setting.SettingMember
+import com.qoli.chatapp.AppString.StorageKeyName
 import org.jetbrains.anko.*
 
 
@@ -22,6 +20,12 @@ class ActivityMain : AppCompatActivity(), AnkoLogger {
         supportActionBar?.hide()
         setContentView(R.layout.activity_main)
 
+        // BottomNavigationView
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+        navView.setItemIconTintList(null)
+
         //startActivity<SettingMember>()
         //return
 
@@ -29,9 +33,7 @@ class ActivityMain : AppCompatActivity(), AnkoLogger {
             return
         }
 
-        // BottomNavigationView
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
-        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
 
         // 切換主頁面
         bottomNavSwitchFragment(FragmentHome())
@@ -88,7 +90,7 @@ class ActivityMain : AppCompatActivity(), AnkoLogger {
      */
 
     private fun userStatus(): Boolean {
-        val key = StoreKeyName().ifLogin()
+        val key = StorageKeyName().ifLogin()
 
         if (Hawk.contains(key)) {
             if (Hawk.get(key)) {

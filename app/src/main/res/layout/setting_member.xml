@@ -22,12 +22,12 @@
     <Button
         android:id="@+id/PayButton"
         style="@style/ButtonPay"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="现在支付"
+        android:text="立即支付以 138 元支付"
         app:layout_constraintBottom_toTopOf="@+id/PassButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

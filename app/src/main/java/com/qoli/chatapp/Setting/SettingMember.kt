@@ -36,7 +36,7 @@ class SettingMember : AppCompatActivity() {
         }
 
         PassButton.onClick {
-            startActivity<ActivityMain>()
+            startActivity<SettingDone>()
 
         }
     }
