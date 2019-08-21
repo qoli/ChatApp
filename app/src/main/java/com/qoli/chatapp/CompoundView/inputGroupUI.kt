@@ -13,7 +13,7 @@ import com.qoli.chatapp.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.custom.ankoView
 
-inline fun ViewManager.inputGroupUI(theme: Int = 0) = inputGroupUI(theme) {}
+fun ViewManager.inputGroupUI(theme: Int = 0) = inputGroupUI(theme) {}
 inline fun ViewManager.inputGroupUI(theme: Int = 0, init: inputGroupUI.() -> Unit) =
     ankoView({ inputGroupUI(it) }, theme, init)
 
