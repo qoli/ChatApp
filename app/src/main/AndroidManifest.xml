@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Setting.SettingDone"></activity>
+        <activity android:name=".Setting.SettingDone" />
         <activity android:name=".Setting.SettingMember" />
         <activity android:name=".Setting.SettingGender" />
         <activity android:name=".ActivitySetting" />

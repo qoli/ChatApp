@@ -11,12 +11,14 @@ import com.orhanobut.hawk.Hawk
 import com.qoli.chatapp.AppString.StorageKeyName
 import org.jetbrains.anko.*
 
-
 class ActivityMain : AppCompatActivity(), AnkoLogger {
 
     // ↓ View 生命週期
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //PushAgent.getInstance(this).onAppStart();
+
         supportActionBar?.hide()
         setContentView(R.layout.activity_main)
 

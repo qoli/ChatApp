@@ -39,8 +39,8 @@ dependencies {
     testImplementation 'junit:junit:4.13-beta-3'
 
     // firebase
-    implementation 'com.google.firebase:firebase-core:17.0.1'
-    implementation 'com.google.firebase:firebase-messaging:19.0.1'
+    implementation 'com.google.firebase:firebase-core:17.1.0'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
 
 
     //anko https://github.com/Kotlin/anko/wiki
@@ -78,7 +78,7 @@ dependencies {
     implementation 'com.github.quickpermissions:quickpermissions-kotlin:0.4.0'
 
     // 高德定位 https://lbs.amap.com/api/android-location-sdk/locationsummary
-    implementation 'com.amap.api:location:latest.integration'
+    implementation 'com.amap.api:location:4.7.0'
 
     // Hawk simple key-value storage https://github.com/orhanobut/hawk
     implementation "com.orhanobut:hawk:2.0.1"
@@ -87,5 +87,14 @@ dependencies {
     implementation 'com.afollestad.material-dialogs:core:3.1.0'
     implementation 'com.afollestad.material-dialogs:bottomsheets:3.1.0'
     implementation 'com.afollestad.material-dialogs:lifecycle:3.1.0'
+
+    //PushSDK必须依赖基础组件库，所以需要加入对应依赖
+    implementation 'com.umeng.umsdk:common:2.0.0'
+    //PushSDK必须依赖utdid库，所以需要加入对应依赖
+    implementation 'com.umeng.umsdk:utdid:1.1.5.3'
+    //PushSDK
+    implementation 'com.umeng.umsdk:push:6.0.1'
+
+    implementation 'com.umeng.umsdk:analytics:8.0.0'
 
 }
