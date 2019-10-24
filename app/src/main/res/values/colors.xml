@@ -36,4 +36,7 @@
   <color name="colorAccent">#D81B60</color>
   <color name="white">#FFFFFF</color>
   <color name="whitea50">#50FFFFFF</color>
+
+  <color name="main_color">#ff5a64</color>
+  <color name="second_color">#fff</color>
 </resources>

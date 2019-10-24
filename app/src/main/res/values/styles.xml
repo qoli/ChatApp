@@ -42,6 +42,14 @@
         <item name="android:foreground">@drawable/ripple_drawable_oval</item>
     </style>
 
+    <style name="ButtonSecond" parent="Widget.AppCompat.Button">
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:background">@drawable/button_second_bg</item>
+        <item name="android:textColor">@color/b30</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:foreground">@drawable/ripple_drawable_oval</item>
+    </style>
+
     <style name="ButtonPay" parent="Widget.AppCompat.Button">
         <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/button_pay_bg</item>

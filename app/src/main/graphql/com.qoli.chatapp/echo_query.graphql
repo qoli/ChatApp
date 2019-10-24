@@ -1,0 +1,6 @@
+query echoQuery {
+  echo {
+    echo
+    echoInt
+  }
+}

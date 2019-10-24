@@ -43,7 +43,7 @@ class FragmentDate : Fragment(), AnkoLogger {
             withDataSource(dataSource)
             withItem<Dating, DatingViewHolder>(R.layout.date_list) {
                 onBind(::DatingViewHolder) { index, item ->
-                    print(index)
+                    //print(index)
                     name.text = item.name
                 }
                 onClick { index ->

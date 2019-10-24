@@ -226,7 +226,7 @@ class FragmentHome : Fragment(), AnkoLogger, SwipeRefreshLayout.OnRefreshListene
             withDataSource(personDataSource)
             withItem<Person, PersonViewHolder>(R.layout.home_list) {
                 onBind(::PersonViewHolder) { index, item ->
-                    print(index)
+                    //print(index)
                     if (!item.avatar.isNullOrEmpty()) {
                         Picasso.get().load("${item.avatar}").into(avatar)
                     }

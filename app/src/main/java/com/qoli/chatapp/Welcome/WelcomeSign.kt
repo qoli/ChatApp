@@ -16,7 +16,6 @@ import com.qoli.chatapp.R
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
-
 class WelcomeSign : AppCompatActivity() {
 
     private val ui: WelcomeSignUI = WelcomeSignUI(this)
