@@ -9,7 +9,10 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.livinglifetechway.quickpermissions_kotlin.runWithPermissions
 import com.orhanobut.hawk.Hawk
 import com.qoli.chatapp.AppString.StorageKeyName
-import org.jetbrains.anko.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 class ActivityMain : AppCompatActivity(), AnkoLogger {
 

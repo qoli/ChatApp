@@ -1,8 +1,8 @@
 package com.qoli.chatapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import org.jetbrains.anko.startActivity
+import androidx.appcompat.app.AppCompatActivity
+
 
 class ActivityLaunch : AppCompatActivity() {
 
@@ -11,7 +11,7 @@ class ActivityLaunch : AppCompatActivity() {
         setContentView(R.layout.activity_launch_)
 
         // 未註冊用戶
-//        startActivity<ActivityWelcome>()
+        //startActivity<ActivityWelcome>()
 
         // 已註冊用戶
         //startActivity<ActivityMain>()

@@ -20,8 +20,6 @@ class ActivityWelcome : AppCompatActivity() {
         // hide ActionBar
         supportActionBar?.hide()
 
-
-
         try {
             // video
             videoView.setRawData(R.raw.appbg)
@@ -32,10 +30,6 @@ class ActivityWelcome : AppCompatActivity() {
         } catch (error:IOError) {
             print(error)
         }
-
-
-        // dev only
-        //startActivity<WelcomeSign>()
 
         loginButton.onClick {
             startActivity<WelcomeSign>(("action" to "signin"))

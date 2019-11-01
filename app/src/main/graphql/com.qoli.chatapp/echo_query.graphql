@@ -1,4 +1,4 @@
-query echoQuery {
+query MyEcho {
   echo {
     echo
     echoInt

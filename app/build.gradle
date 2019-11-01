@@ -34,9 +34,12 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'org.slf4j:slf4j-nop:1.7.28'
 
-    // https://github.com/apollographql/apollo-android
+    // GraphQL https://github.com/apollographql/apollo-android
     implementation 'com.apollographql.apollo:apollo-runtime:1.2.0'
     implementation 'com.apollographql.apollo:apollo-http-cache:1.2.0'
+
+    // okhttp https://square.github.io/okhttp/
+    implementation("com.squareup.okhttp3:okhttp:4.2.1")
 
     // https://github.com/yqritc/Android-ScalableVideoView
     implementation 'com.yqritc:android-scalablevideoview:1.0.4'
@@ -51,10 +54,7 @@ dependencies {
 
     // Anko Layouts
     implementation "org.jetbrains.anko:anko-sdk25:$anko_version"
-    // sdk15, sdk19, sdk21, sdk23 are also available
     implementation "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
-
-    // Coroutine listeners for Anko Layouts
     implementation "org.jetbrains.anko:anko-sdk25-coroutines:$anko_version"
     implementation "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
 
@@ -68,7 +68,7 @@ dependencies {
     implementation 'com.github.nkzawa:socket.io-client:0.6.0'
 
     // push https://pusher.com
-    implementation 'com.pusher:pusher-java-client:2.0.2'
+    // implementation 'com.pusher:pusher-java-client:2.0.2'
 
     // 圓角圖片 https://github.com/vinc3m1/RoundedImageView
     implementation 'com.makeramen:roundedimageview:2.3.0'

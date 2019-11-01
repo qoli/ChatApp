@@ -3,22 +3,23 @@ package com.qoli.chatapp
 import android.app.Application
 import android.os.StrictMode
 import android.util.Log
-import com.google.firebase.FirebaseApp
+import com.apollographql.apollo.ApolloCall
+import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.exception.ApolloException
 import com.orhanobut.hawk.Hawk
 import com.umeng.commonsdk.UMConfigure
 import com.umeng.message.IUmengRegisterCallback
 import com.umeng.message.PushAgent
-
-
+import okhttp3.OkHttpClient
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.exception.ApolloNetworkException
+import org.jetbrains.anko.info
 
 class MainApplication : Application() {
 
-    val TAG = "mPushAgent"
-    
-    override fun onCreate() {
+    val TAG = "Chat_mPushAgent"
 
-        // FCM
-        FirebaseApp.initializeApp(this)
+    override fun onCreate() {
 
         // storage
         Hawk.init(this).build()
@@ -42,7 +43,45 @@ class MainApplication : Application() {
 //                Log.e(TAG, "注册失败：-------->  s:$s,s1:$s1")
 //            }
 //        })
-        
+
+        this.gql()
+
         super.onCreate()
     }
+
+    fun gql() {
+
+        val okHttpClient = OkHttpClient.Builder()
+
+            .build()
+
+        val apolloClient = ApolloClient.builder()
+            .okHttpClient(okHttpClient)
+            .serverUrl("http://123.56.106.87/graphql/")
+            .build()
+
+        apolloClient.query(MyEchoQuery.builder().build())
+            .enqueue(object : ApolloCall.Callback<MyEchoQuery.Data>() {
+                override fun onNetworkError(e: ApolloNetworkException) {
+                    Log.i("ApolloClient","onNetworkError")
+                    Log.i("ApolloClient",e.message)
+                }
+                override fun onFailure(e: ApolloException) {
+                    Log.i("ApolloClient","onFailure")
+                    Log.i("ApolloClient",e.message)
+                }
+
+                override fun onResponse(response: Response<MyEchoQuery.Data>) {
+                    Log.i("ApolloClient","onResponse")
+                    Log.i("ApolloClient",response.data()?.echo.toString())
+
+                    if (response.data() != null) {
+                        //
+                    }
+                }
+
+            })
+
+    }
+
 }
